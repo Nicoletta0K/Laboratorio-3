@@ -34,8 +34,8 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="spnValor" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxOrigen" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="spnVal" min="-2" max="-2" attributes="0"/>
+                          <Component id="cmbInicio" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -47,7 +47,7 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnIntercambiar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cbxDestino" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbFinal" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -65,13 +65,13 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="spnValor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spnVal" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="txtResultado" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="cbxOrigen" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="cbxDestino" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbInicio" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbFinal" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnIntercambiar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="0" pref="27" max="32767" attributes="0"/>
@@ -90,7 +90,7 @@
         <Property name="text" type="java.lang.String" value="Resultado"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JSpinner" name="spnValor">
+    <Component class="javax.swing.JSpinner" name="spnVal">
       <Properties>
         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
           <SpinnerModel initial="0" maximum="10000" minimum="-500" numberType="java.lang.Integer" stepSize="1" type="number"/>
@@ -103,7 +103,7 @@
         <Property name="text" type="java.lang.String" value="0"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxOrigen">
+    <Component class="javax.swing.JComboBox" name="cmbInicio">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -116,13 +116,13 @@
         <Property name="name" type="java.lang.String" value="" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxOrigenActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbInicioActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JComboBox" name="cbxDestino">
+    <Component class="javax.swing.JComboBox" name="cmbFinal">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -134,7 +134,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxDestinoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbFinalActionPerformed"/>
       </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>

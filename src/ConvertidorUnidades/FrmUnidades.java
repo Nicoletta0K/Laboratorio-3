@@ -9,7 +9,7 @@ package ConvertidorUnidades;
  * @author norki
  */
 public class FrmUnidades extends javax.swing.JFrame {
-    
+    private ControladorConvertidor controlador;
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmUnidades.class.getName());
 
     /**
@@ -17,6 +17,7 @@ public class FrmUnidades extends javax.swing.JFrame {
      */
     public FrmUnidades() {
         initComponents();
+        controlador = new ControladorConvertidor(cmbInicio, cmbFinal, spnVal, txtResultado, btnIntercambiar);
     }
 
     /**
@@ -30,10 +31,10 @@ public class FrmUnidades extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        spnValor = new javax.swing.JSpinner();
+        spnVal = new javax.swing.JSpinner();
         txtResultado = new javax.swing.JTextField();
-        cbxOrigen = new javax.swing.JComboBox<>();
-        cbxDestino = new javax.swing.JComboBox<>();
+        cmbInicio = new javax.swing.JComboBox<>();
+        cmbFinal = new javax.swing.JComboBox<>();
         btnIntercambiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -42,17 +43,17 @@ public class FrmUnidades extends javax.swing.JFrame {
 
         jLabel2.setText("Resultado");
 
-        spnValor.setModel(new javax.swing.SpinnerNumberModel(0, -500, 10000, 1));
+        spnVal.setModel(new javax.swing.SpinnerNumberModel(0, -500, 10000, 1));
 
         txtResultado.setEditable(false);
         txtResultado.setText("0");
 
-        cbxOrigen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius", "Fahrenheit", "Kelvin", "Rankine" }));
-        cbxOrigen.setName(""); // NOI18N
-        cbxOrigen.addActionListener(this::cbxOrigenActionPerformed);
+        cmbInicio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius", "Fahrenheit", "Kelvin", "Rankine" }));
+        cmbInicio.setName(""); // NOI18N
+        cmbInicio.addActionListener(this::cmbInicioActionPerformed);
 
-        cbxDestino.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius", "Fahrenheit", "Kelvin", "Rankine" }));
-        cbxDestino.addActionListener(this::cbxDestinoActionPerformed);
+        cmbFinal.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Celsius", "Fahrenheit", "Kelvin", "Rankine" }));
+        cmbFinal.addActionListener(this::cmbFinalActionPerformed);
 
         btnIntercambiar.setText("Intercambiar");
 
@@ -70,8 +71,8 @@ public class FrmUnidades extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(spnValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(spnVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
@@ -81,7 +82,7 @@ public class FrmUnidades extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnIntercambiar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(cmbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -92,12 +93,12 @@ public class FrmUnidades extends javax.swing.JFrame {
                     .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(spnValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spnVal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxOrigen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnIntercambiar))
                 .addGap(0, 27, Short.MAX_VALUE))
         );
@@ -105,13 +106,13 @@ public class FrmUnidades extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbxOrigenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxOrigenActionPerformed
+    private void cmbInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbInicioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxOrigenActionPerformed
+    }//GEN-LAST:event_cmbInicioActionPerformed
 
-    private void cbxDestinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxDestinoActionPerformed
+    private void cmbFinalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFinalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cbxDestinoActionPerformed
+    }//GEN-LAST:event_cmbFinalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -140,11 +141,11 @@ public class FrmUnidades extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnIntercambiar;
-    private javax.swing.JComboBox<String> cbxDestino;
-    private javax.swing.JComboBox<String> cbxOrigen;
+    private javax.swing.JComboBox<String> cmbFinal;
+    private javax.swing.JComboBox<String> cmbInicio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JSpinner spnValor;
+    private javax.swing.JSpinner spnVal;
     private javax.swing.JTextField txtResultado;
     // End of variables declaration//GEN-END:variables
 }
