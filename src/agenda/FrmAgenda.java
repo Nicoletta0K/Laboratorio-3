@@ -11,12 +11,23 @@ package agenda;
 public class FrmAgenda extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(FrmAgenda.class.getName());
-
+ controladorTarea controlador;
+    private javax.swing.DefaultListModel<String> modeloLista;
     /**
      * Creates new form FrmAgenda
      */
     public FrmAgenda() {
         initComponents();
+     controlador = new controladorTarea();
+        modeloLista = new javax.swing.DefaultListModel<>();
+        IstTareas.setModel(modeloLista);
+    }
+     private void actualizarLista() {
+        modeloLista.clear();
+        int cantidad = controlador.obtenerCantidadTareas();
+        for (int i = 0; i < cantidad; i++) {
+            modeloLista.addElement(controlador.obtenerTarea(i).toString());
+        }
     }
 
     /**
@@ -32,96 +43,135 @@ public class FrmAgenda extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtTarea = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        lstTareas = new javax.swing.JList<>();
+        IstTareas = new javax.swing.JList<>();
         btnAgregar = new javax.swing.JButton();
         btnCompletar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setName(""); // NOI18N
+
         jLabel1.setText("Nueva tarea ");
 
-        txtTarea.setEditable(false);
         txtTarea.addActionListener(this::txtTareaActionPerformed);
 
-        jScrollPane1.setViewportView(lstTareas);
+        jScrollPane1.setViewportView(IstTareas);
 
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agenda/add (4).png"))); // NOI18N
-        btnAgregar.setText("Agregar ");
         btnAgregar.addActionListener(this::btnAgregarActionPerformed);
 
-        btnCompletar.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         btnCompletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agenda/accepted_48.png"))); // NOI18N
-        btnCompletar.setText("Completar ");
         btnCompletar.addActionListener(this::btnCompletarActionPerformed);
 
-        btnEliminar.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         btnEliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/agenda/Delete.png"))); // NOI18N
-        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(506, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCompletar)
+                        .addComponent(btnCompletar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEliminar))
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(37, 37, 37))))
+            .addComponent(jScrollPane1)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(8, 8, 8)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCompletar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEliminar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCompletar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTarea, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTareaActionPerformed
-        // TODO add your handling code here:
+        btnAgregarActionPerformed(evt);
     }//GEN-LAST:event_txtTareaActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        String descripcion = txtTarea.getText().trim();
+
+    if (descripcion.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar una tarea.");
+        return;
+    }
+
+    controlador.agregarTarea(descripcion);
+    actualizarLista();
+    txtTarea.setText("");
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCompletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompletarActionPerformed
-        // TODO add your handling code here:
+    int indice = IstTareas.getSelectedIndex();
+
+    if (indice == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una tarea.");
+        return;
+    }
+
+    controlador.completarTarea(indice);
+    actualizarLista();    
     }//GEN-LAST:event_btnCompletarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        int indice = IstTareas.getSelectedIndex();
+
+    if (indice == -1) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar una tarea.");
+        return;
+    }
+
+    tarea tareaSeleccionada = controlador.obtenerTarea(indice);
+
+    if (tareaSeleccionada.getEstado().equals("Pendiente")) {
+        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "La tarea está pendiente. ¿Desea eliminarla igualmente?",
+            "Confirmar eliminación",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+        if (confirmacion != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
+    }
+
+    controlador.eliminarTarea(indice);
+    actualizarLista();
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,13 +199,13 @@ public class FrmAgenda extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JList<String> IstTareas;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCompletar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> lstTareas;
     private javax.swing.JTextField txtTarea;
     // End of variables declaration//GEN-END:variables
 }
