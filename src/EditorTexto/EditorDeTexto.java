@@ -28,7 +28,6 @@ public class EditorDeTexto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
         jPopupMenu1 = new javax.swing.JPopupMenu();
         jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
@@ -37,9 +36,19 @@ public class EditorDeTexto extends javax.swing.JFrame {
         txtEditor = new javax.swing.JTextArea();
         jMenuBar1 = new javax.swing.JMenuBar();
         archivo = new javax.swing.JMenu();
+        abrir = new javax.swing.JMenuItem();
+        guardar = new javax.swing.JMenuItem();
+        salir = new javax.swing.JMenuItem();
         editar = new javax.swing.JMenu();
-
-        jMenuItem1.setText("jMenuItem1");
+        copiar = new javax.swing.JMenuItem();
+        cortar = new javax.swing.JMenuItem();
+        pegar = new javax.swing.JMenuItem();
+        fuente = new javax.swing.JMenu();
+        negrita = new javax.swing.JMenuItem();
+        cursiva = new javax.swing.JMenuItem();
+        color = new javax.swing.JMenu();
+        colorFondo = new javax.swing.JMenuItem();
+        colorLetra = new javax.swing.JMenuItem();
 
         jRadioButtonMenuItem1.setSelected(true);
         jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
@@ -64,10 +73,55 @@ public class EditorDeTexto extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
         );
 
-        archivo.setText("File");
+        archivo.setText("archivo");
+
+        abrir.setText("abrir");
+        abrir.addActionListener(this::abrirActionPerformed);
+        archivo.add(abrir);
+
+        guardar.setText("guardar");
+        guardar.addActionListener(this::guardarActionPerformed);
+        archivo.add(guardar);
+
+        salir.setText("salir");
+        salir.addActionListener(this::salirActionPerformed);
+        archivo.add(salir);
+
         jMenuBar1.add(archivo);
 
-        editar.setText("Edit");
+        editar.setText("editar");
+
+        copiar.setText("copiar");
+        editar.add(copiar);
+
+        cortar.setText("cortar");
+        editar.add(cortar);
+
+        pegar.setText("pegar");
+        editar.add(pegar);
+
+        fuente.setText("fuente");
+
+        negrita.setText("negrita");
+        fuente.add(negrita);
+
+        cursiva.setText("cursiva");
+        fuente.add(cursiva);
+
+        editar.add(fuente);
+
+        color.setText("color ");
+
+        colorFondo.setText("fondo");
+        colorFondo.addActionListener(this::colorFondoActionPerformed);
+        color.add(colorFondo);
+
+        colorLetra.setText("letra");
+        colorLetra.addActionListener(this::colorLetraActionPerformed);
+        color.add(colorLetra);
+
+        editar.add(color);
+
         jMenuBar1.add(editar);
 
         setJMenuBar(jMenuBar1);
@@ -86,6 +140,44 @@ public class EditorDeTexto extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_abrirActionPerformed
+
+    private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_guardarActionPerformed
+
+    private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+        int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
+        this,
+        "¿Desea salir?",
+        "Confirmar salida",
+        javax.swing.JOptionPane.YES_NO_OPTION
+    );
+    if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+        System.exit(0);
+    }
+    }//GEN-LAST:event_salirActionPerformed
+
+    private void colorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorFondoActionPerformed
+       java.awt.Color colorSeleccionado = javax.swing.JColorChooser.showDialog(
+        this, "Seleccionar color de fondo", txtEditor.getBackground()
+    );
+    if (colorSeleccionado != null) {
+        txtEditor.setBackground(colorSeleccionado);
+    }
+    }//GEN-LAST:event_colorFondoActionPerformed
+
+    private void colorLetraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorLetraActionPerformed
+        java.awt.Color colorSeleccionado = javax.swing.JColorChooser.showDialog(
+        this, "Seleccionar color de letra", txtEditor.getForeground()
+    );
+    if (colorSeleccionado != null) {
+        txtEditor.setForeground(colorSeleccionado);
+    }
+    }//GEN-LAST:event_colorLetraActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -112,15 +204,26 @@ public class EditorDeTexto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem abrir;
     private javax.swing.JMenu archivo;
+    private javax.swing.JMenu color;
+    private javax.swing.JMenuItem colorFondo;
+    private javax.swing.JMenuItem colorLetra;
+    private javax.swing.JMenuItem copiar;
+    private javax.swing.JMenuItem cortar;
+    private javax.swing.JMenuItem cursiva;
     private javax.swing.JMenu editar;
+    private javax.swing.JMenu fuente;
+    private javax.swing.JMenuItem guardar;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem negrita;
+    private javax.swing.JMenuItem pegar;
+    private javax.swing.JMenuItem salir;
     private javax.swing.JTextArea txtEditor;
     // End of variables declaration//GEN-END:variables
 }
