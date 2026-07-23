@@ -107,6 +107,7 @@ public class EditorDeTexto extends javax.swing.JFrame {
         editar.setText("editar");
 
         copiar.setText("copiar");
+        copiar.addActionListener(this::copiarActionPerformed);
         editar.add(copiar);
 
         cortar.setText("cortar");
@@ -119,6 +120,7 @@ public class EditorDeTexto extends javax.swing.JFrame {
         fuente.setText("fuente");
 
         negrita.setText("negrita");
+        negrita.addActionListener(this::negritaActionPerformed);
         fuente.add(negrita);
 
         cursiva.setText("cursiva");
@@ -158,7 +160,20 @@ public class EditorDeTexto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void abrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirActionPerformed
-        // TODO add your handling code here:
+    javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
+    javax.swing.filechooser.FileNameExtensionFilter filtro =
+    new javax.swing.filechooser.FileNameExtensionFilter("Solo documentos de texto", "txt");
+    fc.setFileFilter(filtro);
+
+    if (fc.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION){
+        java.io.File archivo = fc.getSelectedFile();
+        try{ String contenido = new String(java.nio.file.Files.readAllBytes(archivo.toPath()));
+            txtEditor.setText(contenido);
+            setTitle("Documento abierto: " + archivo.getAbsolutePath());
+        }catch (java.io.IOException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al abrir el archivo: ");
+        }
+    }
     }//GEN-LAST:event_abrirActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
@@ -215,6 +230,15 @@ txtEditor.setFont(f.deriveFont(f.getStyle() ^ java.awt.Font.ITALIC));
     private void cortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cortarActionPerformed
         txtEditor.cut();
     }//GEN-LAST:event_cortarActionPerformed
+
+    private void negritaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_negritaActionPerformed
+    java.awt.Font f = txtEditor.getFont();
+    txtEditor.setFont(f.deriveFont(f.getStyle() ^ java.awt.Font.BOLD));
+    }//GEN-LAST:event_negritaActionPerformed
+
+    private void copiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_copiarActionPerformed
+        txtEditor.copy();
+    }//GEN-LAST:event_copiarActionPerformed
     
     /**
      * @param args the command line arguments

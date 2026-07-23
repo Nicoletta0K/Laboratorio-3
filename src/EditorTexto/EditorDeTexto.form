@@ -62,6 +62,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="copiar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="copiarActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="cortar">
               <Properties>
@@ -85,6 +88,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="negrita"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="negritaActionPerformed"/>
+                  </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="cursiva">
                   <Properties>
