@@ -82,30 +82,35 @@ public class EditorDeTexto extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 563, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
         );
 
-        archivo.setText("archivo");
+        archivo.setText("Archivo");
 
+        abrir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EditorTexto/New.png"))); // NOI18N
         abrir.setText("abrir");
         abrir.addActionListener(this::abrirActionPerformed);
         archivo.add(abrir);
 
+        guardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EditorTexto/Save.png"))); // NOI18N
         guardar.setText("guardar");
         guardar.addActionListener(this::guardarActionPerformed);
         archivo.add(guardar);
 
+        salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/EditorTexto/Delete.png"))); // NOI18N
         salir.setText("salir");
         salir.addActionListener(this::salirActionPerformed);
         archivo.add(salir);
 
         jMenuBar1.add(archivo);
 
-        editar.setText("editar");
+        editar.setText("Editar");
 
         copiar.setText("copiar");
         copiar.addActionListener(this::copiarActionPerformed);
