@@ -95,6 +95,7 @@ public class EditorDeTexto extends javax.swing.JFrame {
         editar.add(copiar);
 
         cortar.setText("cortar");
+        cortar.addActionListener(this::cortarActionPerformed);
         editar.add(cortar);
 
         pegar.setText("pegar");
@@ -106,6 +107,7 @@ public class EditorDeTexto extends javax.swing.JFrame {
         fuente.add(negrita);
 
         cursiva.setText("cursiva");
+        cursiva.addActionListener(this::cursivaActionPerformed);
         fuente.add(cursiva);
 
         editar.add(fuente);
@@ -145,7 +147,16 @@ public class EditorDeTexto extends javax.swing.JFrame {
     }//GEN-LAST:event_abrirActionPerformed
 
     private void guardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarActionPerformed
-        // TODO add your handling code here:
+       javax.swing.JFileChooser fc = new javax.swing.JFileChooser();
+if (fc.showSaveDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
+    java.io.File f = fc.getSelectedFile();
+    try (java.io.PrintWriter pw = new java.io.PrintWriter(f)) {
+        pw.print(txtEditor.getText());
+        setTitle("Documento guardado: " + f.getAbsolutePath());
+    } catch (java.io.IOException ex) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar");
+    }
+}
     }//GEN-LAST:event_guardarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
@@ -177,6 +188,15 @@ public class EditorDeTexto extends javax.swing.JFrame {
         txtEditor.setForeground(colorSeleccionado);
     }
     }//GEN-LAST:event_colorLetraActionPerformed
+
+    private void cursivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursivaActionPerformed
+       java.awt.Font f = txtEditor.getFont();
+txtEditor.setFont(f.deriveFont(f.getStyle() ^ java.awt.Font.ITALIC));
+    }//GEN-LAST:event_cursivaActionPerformed
+
+    private void cortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cortarActionPerformed
+        txtEditor.cut();
+    }//GEN-LAST:event_cortarActionPerformed
     
     /**
      * @param args the command line arguments
