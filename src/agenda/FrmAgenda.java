@@ -41,7 +41,6 @@ public class FrmAgenda extends javax.swing.JFrame {
 
         jLabel1.setText("Nueva tarea ");
 
-        txtTarea.setEditable(false);
         txtTarea.addActionListener(this::txtTareaActionPerformed);
 
         jScrollPane1.setViewportView(lstTareas);
