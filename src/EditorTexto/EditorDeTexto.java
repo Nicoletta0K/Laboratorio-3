@@ -11,13 +11,28 @@ package EditorTexto;
 public class EditorDeTexto extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(EditorDeTexto.class.getName());
-
+ private boolean documentoModificado = false; 
     /**
      * Creates new form EditorDeTexto
      */
     public EditorDeTexto() {
         initComponents();
-    }
+    setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+    addWindowListener(new java.awt.event.WindowAdapter() {
+        @Override
+        public void windowClosing(java.awt.event.WindowEvent e) {
+            salirActionPerformed(null);
+        }
+    });
+    txtEditor.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+        @Override
+        public void insertUpdate(javax.swing.event.DocumentEvent e) { documentoModificado = true; }
+        @Override
+        public void removeUpdate(javax.swing.event.DocumentEvent e) { documentoModificado = true; }
+        @Override
+        public void changedUpdate(javax.swing.event.DocumentEvent e) { documentoModificado = true; }
+    });
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,15 +175,18 @@ if (fc.showSaveDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
     }//GEN-LAST:event_guardarActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
+if (documentoModificado) {
         int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
-        this,
-        "¿Desea salir?",
-        "Confirmar salida",
-        javax.swing.JOptionPane.YES_NO_OPTION
-    );
-    if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
-        System.exit(0);
+            this,
+            "El documento tiene cambios sin guardar. ¿Desea salir de todas formas?",
+            "Confirmar salida",
+            javax.swing.JOptionPane.YES_NO_OPTION
+        );
+        if (confirmacion != javax.swing.JOptionPane.YES_OPTION) {
+            return;
+        }
     }
+    System.exit(0);
     }//GEN-LAST:event_salirActionPerformed
 
     private void colorFondoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_colorFondoActionPerformed
