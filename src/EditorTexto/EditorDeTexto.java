@@ -17,6 +17,7 @@ public class EditorDeTexto extends javax.swing.JFrame {
      */
     public EditorDeTexto() {
         initComponents();
+        pegar.addActionListener(e -> pegarActionPerformed(e));
     setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
     addWindowListener(new java.awt.event.WindowAdapter() {
         @Override
@@ -230,7 +231,9 @@ txtEditor.setFont(f.deriveFont(f.getStyle() ^ java.awt.Font.ITALIC));
     private void cortarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cortarActionPerformed
         txtEditor.cut();
     }//GEN-LAST:event_cortarActionPerformed
-
+private void pegarActionPerformed(java.awt.event.ActionEvent evt){
+txtEditor.paste();
+}
     private void negritaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_negritaActionPerformed
     java.awt.Font f = txtEditor.getFont();
     txtEditor.setFont(f.deriveFont(f.getStyle() ^ java.awt.Font.BOLD));
